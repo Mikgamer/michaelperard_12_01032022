@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto/Roboto-Bold.woff2") format("woff2"),
+    url("../fonts/Roboto/Roboto-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto/Roboto-Regular.woff2") format("woff2"),
+    url("../fonts/Roboto/Roboto-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto/Roboto-Medium.woff2") format("woff2"),
+    url("../fonts/Roboto/Roboto-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto";
+}
+
+main {
+  display: flex;
+  min-height: calc(
+    100vh - (56px + 20px * 2)
+  ); /* Calcul : window height - header ( which is : logo height + header padding ) */
+}

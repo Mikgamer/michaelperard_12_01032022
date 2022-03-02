@@ -1,0 +1,86 @@
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-t,
+.nav-l {
+  background: #020203;
+  color: white;
+}
+
+.nav-t {
+  display: flex;
+  padding: 20px 30px;
+}
+
+.nav-t .logo {
+  height: 56px;
+}
+
+.nav-t nav {
+  width: 100%;
+}
+
+.nav-t .nav-list {
+  justify-content: space-between;
+  height: 100%;
+  margin: 0 50px 0 100px;
+  font-size: 24px;
+}
+
+.nav-t .nav-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-width: 160px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 5px;
+}
+
+.nav-t .nav-list-item:hover {
+  background: rgb(255 255 255/0.1);
+}
+
+.nav-l nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.nav-l .nav-list {
+  flex-direction: column;
+  margin: 15px;
+}
+
+.nav-l .nav-list-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  width: 64px;
+  height: 64px;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.nav-l .nav-list-icon svg {
+  transition: 0.2s;
+  width: 32px;
+}
+
+.nav-l .nav-list-icon:hover svg {
+  transform: scale(1.15);
+}
+
+.nav-l .copyright {
+  font-size: 12px;
+  writing-mode: vertical-rl;
+  transform: rotate(-180deg);
+}

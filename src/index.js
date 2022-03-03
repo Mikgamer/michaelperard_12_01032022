@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './styles/index.css';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './styles/index.css'
 import { NavTop, NavLeft } from './Nav'
-import Dashboard from './Dashboard';
+import Dashboard from './Dashboard'
 
 ReactDOM.render(
   <React.StrictMode>

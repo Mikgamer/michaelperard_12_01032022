@@ -1,0 +1,57 @@
+.Card {
+  width: 258px;
+  height: 124px;
+  display: flex;
+  align-items: center;
+  background: #fbfbfb;
+  border-radius: 5px;
+  justify-content: space-evenly;
+  box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 0.02);
+}
+
+.Card .card-icon {
+  display: flex;
+  height: 60px;
+  width: 60px;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.Card svg {
+  width: 20px;
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 90px;
+  line-height: 24px;
+}
+
+span.card-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #282d30;
+}
+
+span.card-name {
+  font-size: 14px;
+  color: #74798c;
+}
+
+.bgCal {
+  background: rgb(255 0 0 / 0.07);
+}
+
+.bgPro {
+  background: rgb(74 184 255 / 0.1);
+}
+
+.bgCar {
+  background: rgb(249 206 35 / 0.1);
+}
+
+.bgLip {
+  background: rgb(253 81 129 / 0.1);
+}

@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { ReactElement } from "react"
+import React, { ReactElement } from "react"
 
 import PropTypes from 'prop-types'
 import '../styles/Card.css'
@@ -11,12 +11,11 @@ import { ReactComponent as LipIcon } from '../resources/lipicon.svg'
 /**
  * Card component 
  * 
- * @param {Object} props
  * @param {'calorieCount'|'proteinCount'|'carbohydrateCount'|'lipidCount'} props.keyName Key data name
  * @param {number} props.keyValue Key data value
  * @return {ReactElement} Return the card component with an icon, the key data value with a unit and the name of the key data
  */
-function Card(props) {
+export default function Card(props) {
   const arrData = [
           {icon : <CalIcon />, unit : "kCal", name : "Calories", bgClass : "bgCal" },
           {icon : <ProIcon />, unit : "g", name : "Proteines", bgClass : "bgPro" },
@@ -30,7 +29,6 @@ function Card(props) {
                     keyName === "proteinCount"      ? arrData[1] : 
                     keyName === "carbohydrateCount" ? arrData[2] : 
                     keyName === "lipidCount"        ? arrData[3] : arrData[4]
-  console.log(props);
   return (
     <div className="Card">
       <div className={`card-icon ${keyData.bgClass}`}>{keyData.icon}</div>
@@ -46,5 +44,3 @@ Card.prototype = {
   keyName: PropTypes.oneOf(['calorieCount', 'proteinCount', 'carbohydrateCount', 'lipidCount']),
   keyValue: PropTypes.number
 }
-
-export default Card;

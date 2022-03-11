@@ -5,7 +5,7 @@ import { ReactComponent as Icon3 } from './resources/icon3.svg';
 import { ReactComponent as Icon4 } from './resources/icon4.svg';
 import './styles/Nav.css';
 
-function NavTop() {
+export function NavTop() {
   return (
     <header className='nav-t'>
       <Logo className='logo'/>
@@ -21,7 +21,7 @@ function NavTop() {
   );
 }
 
-function NavLeft() {
+export function NavLeft() {
   return (
     <aside className='nav-l'>
       <nav>
@@ -36,5 +36,3 @@ function NavLeft() {
     </aside>
   );
 }
-
-export { NavTop, NavLeft };

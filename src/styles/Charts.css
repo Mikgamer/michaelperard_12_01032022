@@ -1,0 +1,33 @@
+.barChart {
+  background: #fbfbfb;
+  border-radius: 5px;
+}
+
+#tooltipBar,
+#tooltipBarText {
+  top: 0;
+  left: 0;
+  user-select: none;
+  position: absolute;
+}
+
+#tooltipBarText {
+  background-color: #e60000;
+  color: white;
+  font-size: 7px;
+  font-weight: 500;
+  line-height: 24px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.lineChart {
+  background: #ff0000;
+  border-radius: 5px;
+}
+
+.tooltipLine {
+  user-select: none;
+}

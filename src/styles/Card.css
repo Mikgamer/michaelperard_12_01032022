@@ -37,7 +37,8 @@ span.card-value {
 
 span.card-name {
   font-size: 14px;
-  color: #74798c;
+  color: #9b9eac;
+  font-weight: 500;
 }
 
 .bgCal {

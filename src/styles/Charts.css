@@ -4,7 +4,9 @@
 }
 
 #tooltipBar,
-#tooltipBarText {
+#tooltipBarText,
+#tooltipLine,
+#tooltipLine span {
   top: 0;
   left: 0;
   user-select: none;
@@ -12,7 +14,7 @@
 }
 
 #tooltipBarText {
-  background-color: #e60000;
+  background: #e60000;
   color: white;
   font-size: 7px;
   font-weight: 500;
@@ -28,6 +30,25 @@
   border-radius: 5px;
 }
 
-.tooltipLine {
+#tooltipLine {
   user-select: none;
+  pointer-events: none;
+}
+
+#tooltipLine span {
+  background: white;
+  font-size: 7px;
+  font-weight: 500;
+  line-height: 24px;
+  padding: 4px 8px;
+}
+
+.radarChart {
+  background: #282d30;
+  border-radius: 5px;
+}
+
+.radialChart {
+  background: #fbfbfb;
+  border-radius: 5px;
 }

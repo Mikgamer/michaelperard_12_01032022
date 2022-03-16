@@ -33,3 +33,17 @@ main {
     100vh - (56px + 20px * 2)
   ); /* Calcul : window height - header ( which is : logo height + header padding ) */
 }
+
+h1 {
+  font-size: 48px;
+  margin: 0 0 25px;
+}
+
+h1 span {
+  color: red;
+}
+
+.motd {
+  font-size: 18px;
+  margin: 0 0 60px;
+}

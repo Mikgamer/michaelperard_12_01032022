@@ -10,8 +10,8 @@ export default function Dashboard() {
   return (
     <div className="Dashboard">
       <div className="header">
-        <h1>Bonjour {"username"}</h1>
-        <p className="motd">{"motd"}</p>
+        <h1>Bonjour <span>{"username"}</span></h1>
+        <p className="motd">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
         {/* <Card keyName="calorieCount" keyValue={2600} />
         <Card keyName="proteinCount" keyValue={2600} />
         <Card keyName="carbohydrateCount" keyValue={2600} />

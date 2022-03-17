@@ -33,6 +33,7 @@
 #tooltipLine {
   user-select: none;
   pointer-events: none;
+  display: contents;
 }
 
 #tooltipLine span {

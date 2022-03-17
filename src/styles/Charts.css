@@ -1,4 +1,6 @@
 .barChart {
+  width: 600px;
+  height: auto;
   background: #fbfbfb;
   border-radius: 5px;
 }
@@ -27,7 +29,6 @@
 
 .lineChart {
   background: #ff0000;
-  border-radius: 5px;
 }
 
 #tooltipLine {
@@ -40,16 +41,41 @@
   background: white;
   font-size: 7px;
   font-weight: 500;
-  line-height: 24px;
-  padding: 4px 8px;
+  line-height: 20px;
+  padding: 3px 6px;
 }
 
 .radarChart {
   background: #282d30;
-  border-radius: 5px;
 }
 
 .radialChart {
   background: #fbfbfb;
+}
+
+.lineChart,
+.radarChart,
+.radialChart {
   border-radius: 5px;
+  height: 180px;
+  width: 180px;
+}
+
+@media (min-width: 1440px) {
+  .barChart {
+    height: unset;
+    width: unset;
+  }
+
+  #tooltipLine span {
+    line-height: 24px;
+    padding: 4px 8px;
+  }
+
+  .lineChart,
+  .radarChart,
+  .radialChart {
+    height: unset;
+    width: unset;
+  }
 }

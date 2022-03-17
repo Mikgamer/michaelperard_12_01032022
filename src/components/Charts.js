@@ -108,9 +108,9 @@ export function BarChart(props) {
       // x axis
       currentBarChart.append("g").classed("dates", true)
       .selectAll(".date").data(data).enter()
-      .append("text").classed("date", true).text((d, i) => d.day)
-      .attr("x", (d, i) => 40 + i * (56+(currentBarChartGraphWidth-56*data.length + 32)/(data.length-1)) - 16 - 8 )
-      .attr("y", 126 + currentBarChartGraphHeight )
+      .append("text").classed("date", true).text((d, i) => parseInt(d.day.split("-").slice(-1)))
+      .attr("x", (d, i) => 40 + i * (56+(currentBarChartGraphWidth-56*data.length + 32)/(data.length-1)) + ( parseInt(d.day.split("-").slice(-1)) < 10 ? 8 : 4 ) )
+      .attr("y", 136 + currentBarChartGraphHeight )
       .style("font-size", "14px").attr("font-weight",500).attr("fill", "#9B9EAC")
   })
   
@@ -179,8 +179,16 @@ export function LineChart(props) {
           .attr("cy", data[Math.round(posX / currentLineChartWidth * ( data.length - 1))].sessionLength / sessionMax * 125 * -1 + currentLineChartHeight - 60)
 
           d3.select("#tooltipLine span")
-          .style("left",(parseInt(window.scrollX) + parseInt(lineChart.current.getBoundingClientRect().left) + parseInt(focus.attr("cx")) + 10) + "px")
-          .style("top",(parseInt(window.scrollY) + parseInt(lineChart.current.getBoundingClientRect().top) + parseInt(focus.attr("cy")) - 30) + "px")
+          .style("left",(
+              parseInt(window.scrollX)+
+              parseInt(lineChart.current.getBoundingClientRect().left)+
+              (parseInt(focus.attr("cx")) + 10)*(lineChart.current.getBoundingClientRect().width/currentLineChartWidth) 
+            ) + "px")
+          .style("top", (
+              parseInt(window.scrollY)+
+              parseInt(lineChart.current.getBoundingClientRect().top )+
+              (parseInt(focus.attr("cy")) - 30)*(lineChart.current.getBoundingClientRect().height/currentLineChartHeight)
+            ) + "px")
           .text(data[Math.round(posX / currentLineChartWidth * ( data.length - 1))].sessionLength + " min")
         })
       })

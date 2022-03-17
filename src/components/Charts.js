@@ -167,7 +167,7 @@ export function LineChart(props) {
       currentLineChart.on('mouseover', function () {
         focus.style("display", "block")
         focusCircle.style("display", "block")
-        d3.select("#tooltipLine").append("span").text("Yo")
+        d3.select("#tooltipLine").append("span").text("")
       })
       .on("mousemove",function (e) {
         const posX = d3.pointer(e)[0]
@@ -179,8 +179,9 @@ export function LineChart(props) {
           .attr("cy", data[Math.round(posX / currentLineChartWidth * ( data.length - 1))].sessionLength / sessionMax * 125 * -1 + currentLineChartHeight - 60)
 
           d3.select("#tooltipLine span")
-          .style("left",(parseInt(lineChart.current.getBoundingClientRect().left) + parseInt(focus.attr("cx")) + 5) + "px")
-          .style("top",(parseInt(lineChart.current.getBoundingClientRect().top) + parseInt(focus.attr("cy")) - 5) + "px")
+          .style("left",(parseInt(window.scrollX) + parseInt(lineChart.current.getBoundingClientRect().left) + parseInt(focus.attr("cx")) + 10) + "px")
+          .style("top",(parseInt(window.scrollY) + parseInt(lineChart.current.getBoundingClientRect().top) + parseInt(focus.attr("cy")) - 30) + "px")
+          .text(data[Math.round(posX / currentLineChartWidth * ( data.length - 1))].sessionLength + " min")
         })
       })
       .on('mouseout', function () {

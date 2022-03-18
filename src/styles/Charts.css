@@ -5,17 +5,17 @@
   border-radius: 5px;
 }
 
-#tooltipBar,
-#tooltipBarText,
-#tooltipLine,
-#tooltipLine span {
+.tooltipBar,
+.tooltipBarText,
+.tooltipLine,
+.tooltipLine span {
   top: 0;
   left: 0;
   user-select: none;
   position: absolute;
 }
 
-#tooltipBarText {
+.tooltipBarText {
   background: #e60000;
   color: white;
   font-size: 7px;
@@ -31,13 +31,13 @@
   background: #ff0000;
 }
 
-#tooltipLine {
+.tooltipLine {
   user-select: none;
   pointer-events: none;
   display: contents;
 }
 
-#tooltipLine span {
+.tooltipLine span {
   background: white;
   font-size: 7px;
   font-weight: 500;
@@ -67,7 +67,7 @@
     width: unset;
   }
 
-  #tooltipLine span {
+  .tooltipLine span {
     line-height: 24px;
     padding: 4px 8px;
   }

@@ -16,17 +16,17 @@ export function BarChart(props) {
   const barChart   = useRef(null),
         tooltipBar = useRef(null)
 
-  const data = props.data ?? [ {"day":"2020-07-01","kilogram":0,"calories":0}, {"day":"2020-07-02","kilogram":50,"calories":100},
-                               {"day":"2020-07-03","kilogram":0,"calories":0}, {"day":"2020-07-04","kilogram":50,"calories":100}, 
-                               {"day":"2020-07-05","kilogram":0,"calories":0}, {"day":"2020-07-06","kilogram":50,"calories":100},
+  const data = props.data ?? [ {"day":"2020-07-01","kilogram":0,"calories":0}, {"day":"2020-07-02","kilogram":0,"calories":0},
+                               {"day":"2020-07-03","kilogram":0,"calories":0}, {"day":"2020-07-04","kilogram":0,"calories":0}, 
+                               {"day":"2020-07-05","kilogram":0,"calories":0}, {"day":"2020-07-06","kilogram":0,"calories":0},
                                {"day":"2020-07-07","kilogram":0,"calories":0} ]
 
   const kilogramArr = [...data.map(item => item.kilogram)],
-        kilogramMin = Math.min(...kilogramArr),
-        kilogramMax = Math.max(...kilogramArr),
-        kilogramAve = Math.round(kilogramArr.reduce((a,b) => a + b, 0) / data.length),
+        kilogramMin = Math.min(...kilogramArr) > 1 ? Math.min(...kilogramArr) - 1 : 0,
+        kilogramMax = Math.max(...kilogramArr) + 1,
+        kilogramAve = Math.round(kilogramMax/2),
         caloriesArr = [...data.map(item => item.calories)],
-        caloriesMin = Math.min(...caloriesArr),
+        caloriesMin = Math.min(...caloriesArr) > 50 ? Math.min(...caloriesArr) - 50 : 0,
         caloriesMax = Math.max(...caloriesArr)
 
   useEffect(() => {
@@ -62,16 +62,16 @@ export function BarChart(props) {
       // Kilogram bar
       chart.append("rect")
         .attr("x", (d, i) => i * (56+(currentBarChartGraphWidth-56*data.length + 32)/(data.length-1)) )
-        .attr("y", (d, i) => currentBarChartGraphHeight - ((d.kilogram-(kilogramMin-1))/((kilogramMax+1)-(kilogramMin-1))*currentBarChartGraphHeight) )
-        .attr("width", 8).attr("height", (d, i) => 3 + ((d.kilogram-(kilogramMin-1))/((kilogramMax+1)-(kilogramMin-1))*currentBarChartGraphHeight) )
+        .attr("y", (d, i) => currentBarChartGraphHeight - ((d.kilogram-kilogramMin)/(kilogramMax-kilogramMin)*currentBarChartGraphHeight) )
+        .attr("width", 8).attr("height", (d, i) => 3 + ((d.kilogram-kilogramMin)/(kilogramMax-kilogramMin)*currentBarChartGraphHeight) )
         .attr("rx", 3).attr("ry", 3)
         .attr("fill", "#282D30")
       
       // Calories bar
       chart.append("rect")
         .attr("x", (d, i) => i * (56+(currentBarChartGraphWidth-56*data.length + 32)/(data.length-1)) + 16)
-        .attr("y", (d, i) => currentBarChartGraphHeight - ((d.calories-(caloriesMin-50))/((caloriesMax+50)-(caloriesMin-50))*currentBarChartGraphHeight) )
-        .attr("width", 8).attr("height", (d, i) => 3 + ((d.calories-(caloriesMin-50))/((caloriesMax+50)-(caloriesMin-50))*currentBarChartGraphHeight) )
+        .attr("y", (d, i) => currentBarChartGraphHeight - ((d.calories-caloriesMin)/((caloriesMax+50)-caloriesMin)*currentBarChartGraphHeight) )
+        .attr("width", 8).attr("height", (d, i) => 3 + ((d.calories-caloriesMin)/((caloriesMax+50)-caloriesMin)*currentBarChartGraphHeight) )
         .attr("rx", 3).attr("ry", 3)
         .attr("fill", "#E60000")
 
@@ -113,7 +113,7 @@ export function BarChart(props) {
 
       // y axis
       currentBarChart.append("g").classed("weights", true)
-        .selectAll(".weight").data([kilogramMax + 1,kilogramAve,kilogramMin - 1]).enter()
+        .selectAll(".weight").data([kilogramMax,kilogramAve,kilogramMin]).enter()
         .append("text").classed("weight", true).text( (d, i) => d )
         .attr("x", 790)
         .attr("y", (d, i) => 110 + currentBarChartGraphHeight/2 * i )
@@ -144,12 +144,13 @@ export function LineChart(props) {
   const lineChart   = useRef(null),
         tooltipLine = useRef(null)
 
-  const data = props.data ?? [ {"day":1,"sessionLength":10}, {"day":2,"sessionLength":20},
-                               {"day":3,"sessionLength":10}, {"day":4,"sessionLength":20}, 
-                               {"day":5,"sessionLength":10}, {"day":6,"sessionLength":20}, 
-                               {"day":7,"sessionLength":10} ]
+  const data = props.data ?? [ {"day":1,"sessionLength":0}, {"day":2,"sessionLength":0},
+                               {"day":3,"sessionLength":0}, {"day":4,"sessionLength":0}, 
+                               {"day":5,"sessionLength":0}, {"day":6,"sessionLength":0}, 
+                               {"day":7,"sessionLength":0} ]
 
-  const sessionMax = Math.max(...data.map(item => item.sessionLength))
+  const isSessionLengthLinear  = data.every(item => item.sessionLength === data[0].sessionLength),
+        sessionMax             = Math.max(...data.map(item => item.sessionLength)) !== 0 ? Math.max(...data.map(item => item.sessionLength)) : 1
 
   useEffect(() => {
     lineChart.current.innerHTML = ""
@@ -163,7 +164,7 @@ export function LineChart(props) {
       // Generate curve from data
       const Curve = d3.line()
         .x((d, i) => currentLineChartWidth / ( data.length - 1) * i)
-        .y((d, i) => d.sessionLength / sessionMax * 125 * -1 + currentLineChartHeight - 60)
+        .y((d, i) => isSessionLengthLinear ? currentLineChartHeight - 120 + i*0.01 : d.sessionLength / sessionMax * 125 * -1 + currentLineChartHeight - 60)
         .curve(d3.curveNatural)
 
       // Gradient for custom stroke
@@ -204,8 +205,10 @@ export function LineChart(props) {
           backgroundLine.attr("x",nearPosX)
 
           // Translate circles to show which data is focused
-                focus.attr("cx",nearPosX).attr("cy", data[arrValPosX].sessionLength / sessionMax * 125 * -1 + currentLineChartHeight - 60)
-          focusCircle.attr("cx",nearPosX).attr("cy", data[arrValPosX].sessionLength / sessionMax * 125 * -1 + currentLineChartHeight - 60)
+                focus.attr("cx",nearPosX).attr("cy", isSessionLengthLinear ? currentLineChartHeight - 120 : 
+                                                     data[arrValPosX].sessionLength / sessionMax * 125 * -1 + currentLineChartHeight - 60)
+          focusCircle.attr("cx",nearPosX).attr("cy", isSessionLengthLinear ? currentLineChartHeight - 120 : 
+                                                     data[arrValPosX].sessionLength / sessionMax * 125 * -1 + currentLineChartHeight - 60)
 
           // Translate the tooltip and set its text
           currentTooltipLine.select("span")
@@ -253,9 +256,9 @@ export function LineChart(props) {
 export function RadarChart(props) {
   const radarChart = useRef(null)
 
-  const data = props.data ?? [ { value: 5, kind: 1 }, { value: 20, kind: 2 },
-                               { value: 5, kind: 3 }, { value: 20, kind: 4 }, 
-                               { value: 5, kind: 5 }, { value: 20, kind: 6 } ]
+  const data = props.data ?? [ { value: 0, kind: 1 }, { value: 0, kind: 2 },
+                               { value: 0, kind: 3 }, { value: 0, kind: 4 }, 
+                               { value: 0, kind: 5 }, { value: 0, kind: 6 } ]
 
   const valueArr = [...data.map(item => item.value)],
         valueMax = Math.max(...valueArr)
@@ -291,7 +294,7 @@ export function RadarChart(props) {
     }
     
     // Display data as a custom hexagon
-    currentRadarChart.append("polygon").attr("points", hexaPoly([...data.map(item => item.value / valueMax * (chartMidHeight - 40) )]) )
+    currentRadarChart.append("polygon").attr("points", hexaPoly([...data.map(item => item.value<1 ? 0.5 : item.value / valueMax * (chartMidHeight - 40) )]) )
       .attr("transform", `translate(${chartMidWidth} ${chartMidHeight})`).attr("fill", "rgb(255 1 1/0.7)")
 
     // Legend

@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import Card from './components/Card'
-import { BarChart,LineChart,RadarChart,RadialChart } from './components/Charts'
+// eslint-disable-next-line no-unused-vars
+import React, { useState, useEffect, ReactElement } from 'react';
 import { useParams } from "react-router-dom";
 
+import Card from './components/Card'
+import { BarChart, LineChart, RadarChart, RadialChart } from './components/Charts'
+
 /**
- * Dasboard
+ * Dasboard component 
  * 
- * @return {ReactElement} Return the dashboard component
+ * @return {ReactElement} Return a div with backend dependant data
  */
 export default function Dashboard() {
   const [dataUser, setDataUser] = useState(),
         [dataActi, setDataActi] = useState(),
         [dataSess, setDataSess] = useState(),
-        [dataPerf, setDataPerf] = useState(),
-        param = useParams();
+        [dataPerf, setDataPerf] = useState()
+  const param = useParams()
 
   useEffect(() => {
     fetch(process.env.REACT_APP_BACKEND + "user/" + param.id)
@@ -37,16 +39,16 @@ export default function Dashboard() {
                <div style={{"display":"flex", "flexDirection":"column", "gap":"30px"}}>
                  <BarChart data={dataActi} />
                  <div style={{"display":"flex", "justifyContent":"space-between"}}>
-                   <LineChart data={dataSess}/>
-                   <RadarChart data={dataPerf}/>
-                   <RadialChart data={dataUser?.todayScore ?? dataUser?.score}/>
+                   <LineChart   data={dataSess} />
+                   <RadarChart  data={dataPerf} />
+                   <RadialChart data={dataUser?.todayScore ?? dataUser?.score} />
                  </div>
                </div>
                <div style={{"display":"flex", "flexDirection":"column", "justifyContent":"space-between"}}>
-                 <Card keyName="calorieCount" keyValue={dataUser?.keyData.calorieCount ?? 0} />
-                 <Card keyName="proteinCount" keyValue={dataUser?.keyData.proteinCount ?? 0} />
+                 <Card keyName="calorieCount"      keyValue={dataUser?.keyData.calorieCount      ?? 0} />
+                 <Card keyName="proteinCount"      keyValue={dataUser?.keyData.proteinCount      ?? 0} />
                  <Card keyName="carbohydrateCount" keyValue={dataUser?.keyData.carbohydrateCount ?? 0} />
-                 <Card keyName="lipidCount" keyValue={dataUser?.keyData.lipidCount ?? 0} />
+                 <Card keyName="lipidCount"        keyValue={dataUser?.keyData.lipidCount        ?? 0} />
                </div>
              </div>
            </div>

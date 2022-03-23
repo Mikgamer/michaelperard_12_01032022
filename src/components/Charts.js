@@ -1,18 +1,27 @@
 // eslint-disable-next-line no-unused-vars
-import React, { ReactElement, useEffect, useRef } from "react"
-
+import React, { useEffect, useRef, ReactElement } from "react"
 import PropTypes from 'prop-types'
-import '../styles/Charts.css'
+
 import * as d3 from "d3"
 
+import '../styles/Charts.css'
+
+/**
+ * BarChart component 
+ * 
+ * @param  {number} props.data Data value
+ * @return {ReactElement} Return a bar chart with the user weight and calories for each days
+ */
 export function BarChart(props) {
   const barChart   = useRef(null),
         tooltipBar = useRef(null)
 
-  const data        = props.data ?? [ {"day":"2020-07-01","kilogram":30,"calories":100}, {"day":"2020-07-02","kilogram":30,"calories":100},
-    {"day":"2020-07-03","kilogram":30,"calories":100}, {"day":"2020-07-04","kilogram":30,"calories":100}, {"day":"2020-07-05","kilogram":30,"calories":100},
-    {"day":"2020-07-06","kilogram":30,"calories":100}, {"day":"2020-07-07","kilogram":30,"calories":100} ],
-        kilogramArr = [...data.map(item => item.kilogram)],
+  const data = props.data ?? [ {"day":"2020-07-01","kilogram":0,"calories":0}, {"day":"2020-07-02","kilogram":50,"calories":100},
+                               {"day":"2020-07-03","kilogram":0,"calories":0}, {"day":"2020-07-04","kilogram":50,"calories":100}, 
+                               {"day":"2020-07-05","kilogram":0,"calories":0}, {"day":"2020-07-06","kilogram":50,"calories":100},
+                               {"day":"2020-07-07","kilogram":0,"calories":0} ]
+
+  const kilogramArr = [...data.map(item => item.kilogram)],
         kilogramMin = Math.min(...kilogramArr),
         kilogramMax = Math.max(...kilogramArr),
         kilogramAve = Math.round(kilogramArr.reduce((a,b) => a + b, 0) / data.length),
@@ -120,18 +129,27 @@ export function BarChart(props) {
   })
   
   return <>
-           <svg ref={barChart}   className="barChart"  ></svg>
-           <div ref={tooltipBar} className="tooltipBar"></div>
+           <svg ref={barChart}   className="barChart"  />
+           <div ref={tooltipBar} className="tooltipBar" ></div>
          </>
 }
 
+/**
+ * LineChart component 
+ * 
+ * @param  {number} props.data Data value
+ * @return {ReactElement} Return a line chart showing how much time the user spent in each sessions
+ */
 export function LineChart(props) {
   const lineChart   = useRef(null),
         tooltipLine = useRef(null)
 
-  const data = props.data ?? [ {"day":1,"sessionLength":10}, {"day":2,"sessionLength":20}, {"day":3,"sessionLength":10},
-    {"day":4,"sessionLength":20}, {"day":5,"sessionLength":10}, {"day":6,"sessionLength":20}, {"day":7,"sessionLength":10} ],
-        sessionMax = Math.max(...data.map(item => item.sessionLength))
+  const data = props.data ?? [ {"day":1,"sessionLength":10}, {"day":2,"sessionLength":20},
+                               {"day":3,"sessionLength":10}, {"day":4,"sessionLength":20}, 
+                               {"day":5,"sessionLength":10}, {"day":6,"sessionLength":20}, 
+                               {"day":7,"sessionLength":10} ]
+
+  const sessionMax = Math.max(...data.map(item => item.sessionLength))
 
   useEffect(() => {
     lineChart.current.innerHTML = ""
@@ -221,17 +239,25 @@ export function LineChart(props) {
   })
   
   return <>
-           <svg ref={lineChart}   className="lineChart"  ></svg>
-           <div ref={tooltipLine} className="tooltipLine"></div>
+           <svg ref={lineChart}   className="lineChart"  />
+           <div ref={tooltipLine} className="tooltipLine" ></div>
          </>
 }
 
+/**
+ * RadarChart component 
+ * 
+ * @param  {number} props.data Data value
+ * @return {ReactElement} Return a radar chart showing in which field the user is the best
+ */
 export function RadarChart(props) {
   const radarChart = useRef(null)
 
-  const data     = props.data ?? [ { value: 5, kind: 1 }, { value: 20, kind: 2 }, { value: 5, kind: 3 },
-    { value: 20, kind: 4 }, { value: 5, kind: 5 }, { value: 20, kind: 6 } ],
-        valueArr = [...data.map(item => item.value)],
+  const data = props.data ?? [ { value: 5, kind: 1 }, { value: 20, kind: 2 },
+                               { value: 5, kind: 3 }, { value: 20, kind: 4 }, 
+                               { value: 5, kind: 5 }, { value: 20, kind: 6 } ]
+
+  const valueArr = [...data.map(item => item.value)],
         valueMax = Math.max(...valueArr)
   
   /**
@@ -240,12 +266,12 @@ export function RadarChart(props) {
    * @param {Array.<Number>} values How far away points are from the center of the circle, this is an array of exactly 6 numbers
    * @return {String} Return the coordinates of all 6 points of the polygon according to the values as a string
    */
-  const hexaPoly = (values = Array(6).fill(1)) => 
-  values.map((distance, i) => [
-     distance*Math.cos(60*(Math.PI/180)*(i-0.5)),
-    -distance*Math.sin(60*(Math.PI/180)*(i-0.5))
-  ].join(",")).join(" ")
-  
+  const hexaPoly = (values = Array(6).fill(1)) => values.map(
+                                                    (distance, i) => [
+                                                      distance*Math.cos(60*(Math.PI/180)*(i-0.5)),
+                                                      -distance*Math.sin(60*(Math.PI/180)*(i-0.5))
+                                                    ].join(",")
+                                                  ).join(" ")
 
   useEffect(() => {
     radarChart.current.innerHTML = ""
@@ -278,13 +304,20 @@ export function RadarChart(props) {
     textValues.append("tspan").text("Energie").attr("x", 5).attr("y", 185)
     textValues.append("tspan").text("Cardio").attr("x", 5).attr("y", 85)
   })
-  return <svg ref={radarChart} className="radarChart"></svg>
+
+  return <svg ref={radarChart} className="radarChart" />
 }
 
+/**
+ * RadialChart component 
+ * 
+ * @param  {number} props.data Data value
+ * @return {ReactElement} Return a radial chart showing how far the user is to reach his goal
+ */
 export function RadialChart(props) {
   const radialChart = useRef(null)
 
-  const data = props.data ?? 0.95
+  const data = props.data ?? 0
 
   useEffect(() => {
     radialChart.current.innerHTML = ""
@@ -319,5 +352,38 @@ export function RadialChart(props) {
       
 
   })
-  return <svg ref={radialChart} className="radialChart"></svg>
+
+  return <svg ref={radialChart} className="radialChart" />
+}
+
+BarChart.propTypes = {
+  data : PropTypes.arrayOf(
+    PropTypes.shape({
+      day      : PropTypes.string,
+      kilogram : PropTypes.number,
+      calories : PropTypes.number
+    })
+  )
+}
+
+LineChart.propTypes = {
+  data : PropTypes.arrayOf(
+    PropTypes.shape({
+      day           : PropTypes.number,
+      sessionLength : PropTypes.number
+    })
+  )
+}
+
+RadarChart.propTypes = {
+  data : PropTypes.arrayOf(
+    PropTypes.shape({
+      value : PropTypes.number,
+      kind  : PropTypes.number
+    })
+  )
+}
+
+RadialChart.propTypes = {
+  data : PropTypes.number
 }

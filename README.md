@@ -20,20 +20,18 @@
 
 ### Prerequisites
 
-- [NodeJS (latest version)](https://nodejs.org)
+- [NodeJS (version 16)](https://nodejs.org)
 - [npm](https://www.npmjs.com) or [Yarn](https://yarnpkg.com/)
 
 ### Launching the project
 
 1. This website use a [Backend](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard), follow [these instructions](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard/blob/master/README.md) beforehand
 
-2. Fork this repository
+2. Clone it on your computer.
 
-3. Clone it on your computer.
+3. Use `npm i` or `yarn` to download node modules
 
-4. Use `npm i` or `yarn` to download node modules
-
-5. Use `npm start` or `yarn start` to run the website (see [Scripts](#scripts) for other options)
+4. Use `npm start` or `yarn start` to run the website (see [Scripts](#scripts) for other options)
 
 ### To access the users profile page
 

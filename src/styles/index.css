@@ -50,6 +50,22 @@ h1 span {
   margin: 30px 0;
 }
 
+.Dashboard .flex {
+  display: flex;
+}
+
+.Dashboard .flex.gap {
+  gap: 30px;
+}
+
+.Dashboard .flex.between {
+  justify-content: space-between;
+}
+
+.Dashboard .flex.column {
+  flex-direction: column;
+}
+
 .motd {
   font-size: 12px;
   margin: 0 0 30px;

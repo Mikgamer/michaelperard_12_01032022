@@ -35,16 +35,16 @@ export default function Dashboard() {
            <div className="content">
              <h1>Bonjour <span>{dataUser?.userInfos.firstName ?? "Invité"}</span></h1>
              <p className="motd">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
-             <div style={{"display":"flex", "gap":"30px"}}>
-               <div style={{"display":"flex", "flexDirection":"column", "gap":"30px"}}>
+             <div className="flex gap">
+               <div className="flex gap column">
                  <BarChart data={dataActi} />
-                 <div style={{"display":"flex", "justifyContent":"space-between"}}>
+                 <div className="flex between" >
                    <LineChart   data={dataSess} />
                    <RadarChart  data={dataPerf} />
                    <RadialChart data={dataUser?.todayScore ?? dataUser?.score} />
                  </div>
                </div>
-               <div style={{"display":"flex", "flexDirection":"column", "justifyContent":"space-between"}}>
+               <div className="flex between column" >
                  <Card keyName="calorieCount"      keyValue={dataUser?.keyData.calorieCount      ?? 0} />
                  <Card keyName="proteinCount"      keyValue={dataUser?.keyData.proteinCount      ?? 0} />
                  <Card keyName="carbohydrateCount" keyValue={dataUser?.keyData.carbohydrateCount ?? 0} />

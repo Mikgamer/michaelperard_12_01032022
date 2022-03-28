@@ -230,7 +230,7 @@ export function LineChart(props) {
     // Legend
       // Title
       const title = currentLineChart.append("text").attr("x", 32).attr("y", 40)
-        .style("font-size", "15px").attr("fill", "rgb(255 255 255/0.5)").attr("font-weight",500)
+        .style("font-size", "15px").attr("fill", "rgb(255 255 255/0.8)").attr("font-weight",500)
       title.append("tspan").text("Durée moyenne des").attr("x", 32).attr("y", 40)
       title.append("tspan").text("sessions").attr("x", 32).attr("y", 40 + 24)
 

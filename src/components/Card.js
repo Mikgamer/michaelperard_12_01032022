@@ -25,7 +25,7 @@ export default function Card(props) {
   return <div className="Card">
            <div className={`card-icon ${keyData.bgClass}`}>{keyData.icon}</div>
            <div className="card-text">
-             <span className="card-value">{props.keyValue + keyData.unit}</span>
+             <span className="card-value">{props.keyValue.toLocaleString("en") + keyData.unit}</span>
              <span className="card-name">{keyData.name}</span>
            </div>
          </div>

@@ -7,19 +7,24 @@ import Dashboard from './Dashboard'
 
 import './styles/index.css'
 
+/**
+ * Navigation 
+ * 
+ * @return {ReactElement} Return the user profile page 
+ */
+const Navigation = () => <>
+                           <NavTop />
+                           <main>
+                             <NavLeft />
+                             <Dashboard />
+                           </main>
+                         </>
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/user/:id" element={ 
-          <>
-            <NavTop />
-            <main>
-              <NavLeft />
-              <Dashboard />
-            </main>
-          </>
-        } />
+        <Route path="/user/:id" element={ <Navigation /> } />
         <Route path="*" element={ <Navigate to="/user/12" /> } />
       </Routes>
     </BrowserRouter>

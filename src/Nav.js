@@ -28,7 +28,7 @@ export function NavTop() {
 }
 
 /**
- * NavTop component 
+ * NavLeft component 
  * 
  * @return {ReactElement} Return an aside component with navigation
  */

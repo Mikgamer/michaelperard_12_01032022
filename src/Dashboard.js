@@ -20,12 +20,16 @@ export default function Dashboard() {
      * Set data state with user data from the api
      */
     const loadData = async () => {
-      let dataUser = await getDataUser(param.id),
-          dataActi = await getDataActi(param.id),
-          dataSess = await getDataSess(param.id),
-          dataPerf = await getDataPerf(param.id)
-
-      setData({ dataUser, dataActi, dataSess, dataPerf })
+      try {
+        let dataUser = await getDataUser(param.id),
+            dataActi = await getDataActi(param.id),
+            dataSess = await getDataSess(param.id),
+            dataPerf = await getDataPerf(param.id)
+        
+        setData({ dataUser, dataActi, dataSess, dataPerf })
+      } catch (error) {
+        console.error(`[This is an error]\n${error}`)
+      }
     }
   
     loadData()

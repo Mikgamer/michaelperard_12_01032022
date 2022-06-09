@@ -5,7 +5,8 @@
 ![PropTypes Version](https://img.shields.io/badge/PropTypes-v15.8.1-green.svg)
 <img  src="https://user.oc-static.com/upload/2020/08/18/15977560509272_logo%20%285%29.png" height="20" alt="Logo  SportSee" align="top">
 
-#### SportSee is a startup dedicated to sports coaching, this code is the new version of the user profile page of the website
+> SportSee is a startup dedicated to sports coaching, this code is the new version of the user profile page of the website  
+> Project 12 of [OpenClassrooms's](https://openclassrooms.com/) [JavaScript React Developer program](https://openclassrooms.com/en/paths/517-javascript-react-developer)
 
 ## Table of content
 
